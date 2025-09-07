@@ -1,0 +1,80 @@
+# Build outputs
+build/
+*/build/
+.gradle/
+.kotlin/
+*.log
+
+# IDE files
+.idea/
+!.idea/runConfigurations/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Android
+local.properties
+*.apk
+*.aab
+*.ap_
+*.dex
+*.class
+bin/
+gen/
+out/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# iOS/Xcode
+*.xcuserdata
+*.xccheckout
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+DerivedData/
+.build/
+xcuserdata/
+
+# Xcode workspace and schemes
+*.xcworkspace/!contents.xcworkspacedata
+*.xcworkspace/xcshareddata/
+*.xcworkspace/xcuserdata/
+
+# Generated frameworks and build artifacts
+sample/build/
+sample/iosApp/build/
+sample/iosApp/KlocaSample.xcodeproj/project.xcworkspace/
+sample/iosApp/KlocaSample.xcodeproj/xcuserdata/
+
+# KSP generated files
+**/generated/
+**/build/generated/
+
+# Kotlin Multiplatform
+kotlin-js-store/
+node_modules/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.orig
+
+# Secrets and keys
+keystore.properties
+signing.properties
+*.keystore
+*.jks

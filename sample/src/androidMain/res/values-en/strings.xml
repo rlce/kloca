@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="greeting_hello_with_name">Hello, %1$s!</string>
+    <string name="language_change_success">Language changed to %1$s</string>
+    <string name="language_current">Current Language: %1$s</string>
+    <string name="language_system">System Default</string>
+    <string name="language_title">Select Language</string>
+    <string name="navigation_language">Language</string>
+</resources>

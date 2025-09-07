@@ -1,0 +1,10 @@
+i18n:
+  greeting:
+    hello_with_name: "Hello, %1$s!"
+  navigation:
+    language: "Language"
+  language:
+    title: "Select Language"
+    current: "Current Language: %1$s"
+    system: "System Default"
+    change_success: "Language changed to %1$s"

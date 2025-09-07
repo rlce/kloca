@@ -1,0 +1,6 @@
+"greeting.hello_with_name" = "¡Hola, %1$s!";
+"language.change_success" = "Idioma cambiado a %1$s";
+"language.current" = "Idioma Actual: %1$s";
+"language.system" = "Predeterminado del Sistema";
+"language.title" = "Seleccionar Idioma";
+"navigation.language" = "Idioma";
