@@ -1,8 +1,8 @@
 # Kloca - KSP i18n Plugin for Kotlin Multiplatform
 
-[![Maven Central](https://img.shields.io/maven-central/v/dev.rlce.kloca/gradle-plugin.svg?label=Plugin)](https://search.maven.org/artifact/dev.rlce.kloca/gradle-plugin)
-[![Maven Central](https://img.shields.io/maven-central/v/dev.rlce.kloca/runtime.svg?label=Runtime)](https://search.maven.org/artifact/dev.rlce.kloca/runtime)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![kloca-gradle-plugin](https://img.shields.io/badge/kloca--gradle--plugin-0.1.0-blue?logo=gradle)](https://github.com/rlce/kloca/packages)
+[![kloca-runtime](https://img.shields.io/badge/kloca--runtime-0.1.0-blue?logo=kotlin)](https://github.com/rlce/kloca/packages)
+[![KMP](https://img.shields.io/badge/Platforms-Android%20%7C%20iOS-blue?logo=kotlin)](https://kotlinlang.org/docs/multiplatform.html)
 [![Kotlin](https://img.shields.io/badge/Kotlin-2.2.0+-blue.svg)](https://kotlinlang.org)
 
 Kloca is a KSP (Kotlin Symbol Processing) Gradle plugin that automates internationalization (i18n) for Kotlin Multiplatform projects. It processes YAML translation files and generates platform-specific resources and type-safe Kotlin code.
