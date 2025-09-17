@@ -78,3 +78,6 @@ keystore.properties
 signing.properties
 *.keystore
 *.jks
+*.gpg
+*.asc
+kloca_credentials.sh

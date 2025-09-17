@@ -2,7 +2,9 @@
 kotlin = "2.2.0"
 ksp = "2.2.0-2.0.2"
 compose = "1.8.2"
-android-gradle = "8.7.3"
+android-gradle = "8.10.1"
+android-minSdk = "24"
+android-compileSdk = "35"
 androidx-activity = "1.10.0"
 androidx-core = "1.15.0"
 compose-material3 = "1.3.1"
@@ -10,6 +12,7 @@ kotlinpoet = "1.18.1"
 snakeyaml = "2.2"
 junit = "5.10.0"
 robolectric = "4.13"
+vanniktechMavenPublish = "0.34.0"
 
 [libraries]
 # Kotlin
@@ -48,6 +51,7 @@ kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "ko
 android-library = { id = "com.android.library", version.ref = "android-gradle" }
 android-application = { id = "com.android.application", version.ref = "android-gradle" }
 compose = { id = "org.jetbrains.compose", version.ref = "compose" }
+vanniktech-mavenPublish = { id = "com.vanniktech.maven.publish", version.ref = "vanniktechMavenPublish" }
 
 [bundles]
 kotlin-stdlib = ["kotlin-stdlib", "kotlin-stdlib-common", "kotlin-stdlib-jdk8"]

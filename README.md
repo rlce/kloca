@@ -1,7 +1,7 @@
 # Kloca - KSP i18n Plugin for Kotlin Multiplatform
 
-[![kloca-gradle-plugin](https://img.shields.io/badge/kloca--gradle--plugin-0.1.0-blue?logo=gradle)](https://github.com/rlce/kloca/packages)
-[![kloca-runtime](https://img.shields.io/badge/kloca--runtime-0.1.0-blue?logo=kotlin)](https://github.com/rlce/kloca/packages)
+[![Gradle Plugin](https://img.shields.io/badge/Gradle%20Plugin-0.1.0-blue?logo=gradle)](https://central.sonatype.com/search?q=io.github.rlce.kloca)
+[![Runtime](https://img.shields.io/badge/Runtime-0.1.0-blue?logo=apachemaven)](https://central.sonatype.com/search?q=io.github.rlce.kloca-runtime)
 [![KMP](https://img.shields.io/badge/Platforms-Android%20%7C%20iOS-blue?logo=kotlin)](https://kotlinlang.org/docs/multiplatform.html)
 [![Kotlin](https://img.shields.io/badge/Kotlin-2.2.0+-blue.svg)](https://kotlinlang.org)
 
@@ -15,7 +15,7 @@ Picture this: You're building a Kotlin Multiplatform app that needs to support m
 
 **Traditional approaches lead to:**
 - ❌ **Duplicated translation files** across platforms
-- ❌ **Manual synchronization** between iOS and Android resources  
+- ❌ **Manual synchronization** between iOS and Android resources
 - ❌ **Runtime string errors** from typos in key names
 - ❌ **Translator confusion** with platform-specific formats
 - ❌ **Broken builds** when translations are out of sync
@@ -146,7 +146,7 @@ Add to your `build.gradle.kts`:
 ```kotlin
 plugins {
     kotlin("multiplatform")
-    id("dev.rlce.kloca.plugin") version "0.1.0"
+    id("io.github.rlce.kloca") version "0.1.0"
 }
 ```
 
@@ -156,7 +156,7 @@ plugins {
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation("dev.rlce.kloca:runtime:0.1.0")
+            implementation("io.github.rlce:kloca-runtime:0.1.0")
         }
     }
 }
@@ -299,13 +299,13 @@ In your shared module's `build.gradle.kts`:
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
-    id("dev.rlce.kloca.plugin") version "0.1.0"
+    id("io.github.rlce.kloca") version "0.1.0"
 }
 
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation("dev.rlce.kloca:runtime:0.1.0")
+            implementation("io.github.rlce:kloca-runtime:0.1.0")
         }
     }
 }
@@ -579,7 +579,7 @@ kloca {
 ```kotlin
 plugins {
     kotlin("multiplatform")
-    id("dev.rlce.kloca.plugin") version "0.1.0"
+    id("io.github.rlce.kloca") version "0.1.0"
 }
 
 kloca {
@@ -664,10 +664,10 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             // Core runtime for string access
-            implementation("dev.rlce.kloca:runtime:0.1.0")
+            implementation("io.github.rlce:kloca-runtime:0.1.0")
 
             // Optional: Compose integration
-            implementation("dev.rlce.kloca:runtime-compose:0.1.0")
+            implementation("io.github.rlce:kloca-runtime-compose:0.1.0")
         }
     }
 }
@@ -771,13 +771,13 @@ For projects with multiple modules, simply apply the plugin to each module:
 // Module 1: feature-auth
 plugins {
     kotlin("multiplatform")
-    id("dev.rlce.kloca.plugin")
+    id("io.github.rlce.kloca")
 }
 
 // Module 2: feature-profile  
 plugins {
     kotlin("multiplatform")
-    id("dev.rlce.kloca.plugin")
+    id("io.github.rlce.kloca")
 }
 ```
 

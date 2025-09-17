@@ -10,7 +10,7 @@ class KlocaExtensionSimpleTest {
     @Test
     fun testExtensionCreation() {
         val project = ProjectBuilder.builder().build()
-        project.pluginManager.apply("dev.rlce.kloca")
+        project.pluginManager.apply("io.github.rlce.kloca")
 
         val extension = project.extensions.findByType(KlocaExtension::class.java)
         assertNotNull(extension)
@@ -19,7 +19,7 @@ class KlocaExtensionSimpleTest {
     @Test
     fun testDefaultValues() {
         val project = ProjectBuilder.builder().build()
-        project.pluginManager.apply("dev.rlce.kloca")
+        project.pluginManager.apply("io.github.rlce.kloca")
 
         val extension = project.extensions.findByType(KlocaExtension::class.java)!!
 
@@ -30,7 +30,7 @@ class KlocaExtensionSimpleTest {
     @Test
     fun testSetValues() {
         val project = ProjectBuilder.builder().build()
-        project.pluginManager.apply("dev.rlce.kloca")
+        project.pluginManager.apply("io.github.rlce.kloca")
 
         val extension = project.extensions.findByType(KlocaExtension::class.java)!!
 
