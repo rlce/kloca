@@ -11,7 +11,7 @@ class GenerateTranslationsTaskSimpleTest {
     @Test
     fun testTaskExists() {
         val project = ProjectBuilder.builder().build()
-        project.pluginManager.apply("dev.rlce.kloca")
+        project.pluginManager.apply("io.github.rlce.kloca")
 
         val task = project.tasks.findByName("generateTranslations")
         assertNotNull(task)
@@ -21,7 +21,7 @@ class GenerateTranslationsTaskSimpleTest {
     @Test
     fun testTaskConfiguration() {
         val project = ProjectBuilder.builder().build()
-        project.pluginManager.apply("dev.rlce.kloca")
+        project.pluginManager.apply("io.github.rlce.kloca")
 
         val task = project.tasks.getByName("generateTranslations") as GenerateTranslationsTask
         assertEquals("localization", task.group)
@@ -31,7 +31,7 @@ class GenerateTranslationsTaskSimpleTest {
     @Test
     fun testTaskType() {
         val project = ProjectBuilder.builder().build()
-        project.pluginManager.apply("dev.rlce.kloca")
+        project.pluginManager.apply("io.github.rlce.kloca")
 
         val task = project.tasks.getByName("generateTranslations")
         assertTrue(task is GenerateTranslationsTask)

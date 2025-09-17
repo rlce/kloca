@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.compose)
     alias(libs.plugins.kotlin.compose)
-    id("dev.rlce.kloca") version "0.1.0"
+    id("io.github.rlce.kloca") version "0.1.0"
 }
 
 kotlin {
@@ -27,8 +27,8 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation("dev.rlce.kloca:kloca-runtime:${project.findProperty("kloca.runtime.version")}")
-                implementation("dev.rlce.kloca:kloca-runtime-compose:${project.findProperty("kloca.runtime.compose.version")}")
+                implementation(project(":kloca-runtime"))
+                implementation(project(":kloca-runtime-compose"))
                 implementation(compose.ui)
                 implementation(compose.foundation)
                 implementation(compose.material3)
@@ -45,12 +45,10 @@ kotlin {
 
 android {
     namespace = "dev.rlce.kloca.sample"
-    compileSdk = 35
-
+    compileSdk = libs.versions.android.compileSdk.get().toInt()
     defaultConfig {
         applicationId = "dev.rlce.kloca.sample"
-        minSdk = 24
-        targetSdk = 35
+        minSdk = libs.versions.android.minSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
     }
