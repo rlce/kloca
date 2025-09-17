@@ -12,7 +12,7 @@ class UserLanguageStringProviderTest {
     fun testInitializeWithContext() {
         val context = Unit
 
-        UserLanguageStringProvider.initialize(context)
+        UserLanguageStringProvider.initialize(context, emptyArray(), { DefaultIosLanguagePersistence() })
 
         // Should not throw exception and should initialize properly
         val availableLanguages = UserLanguageStringProvider.getAvailableLanguages()
@@ -24,7 +24,7 @@ class UserLanguageStringProviderTest {
         val context = Unit
         val languages = arrayOf("en", "es", "fr")
 
-        UserLanguageStringProvider.initialize(context, languages)
+        UserLanguageStringProvider.initialize(context, languages, { DefaultIosLanguagePersistence() })
 
         val availableLanguages = UserLanguageStringProvider.getAvailableLanguages()
         assertEquals(languages.toList(), availableLanguages)
@@ -32,7 +32,7 @@ class UserLanguageStringProviderTest {
 
     @Test
     fun testSetAndGetLanguage() {
-        UserLanguageStringProvider.initialize(Unit, arrayOf("en", "es", "fr"))
+        UserLanguageStringProvider.initialize(Unit, arrayOf("en", "es", "fr"), { DefaultIosLanguagePersistence() })
 
         // Initially should be null (or previously saved value)
         UserLanguageStringProvider.setLanguage("es")
@@ -51,7 +51,7 @@ class UserLanguageStringProviderTest {
 
     @Test
     fun testGetStringWithInitialization() {
-        UserLanguageStringProvider.initialize(Unit, arrayOf("en", "es"))
+        UserLanguageStringProvider.initialize(Unit, arrayOf("en", "es"), { DefaultIosLanguagePersistence() })
         UserLanguageStringProvider.setLanguage("en")
 
         // Should return the key as fallback since no bundle resources in test
@@ -61,7 +61,7 @@ class UserLanguageStringProviderTest {
 
     @Test
     fun testGetStringWithArgs() {
-        UserLanguageStringProvider.initialize(Unit, arrayOf("en", "es"))
+        UserLanguageStringProvider.initialize(Unit, arrayOf("en", "es"), { DefaultIosLanguagePersistence() })
         UserLanguageStringProvider.setLanguage("en")
 
         // Should return the key as fallback since no bundle resources in test
@@ -77,7 +77,7 @@ class UserLanguageStringProviderTest {
 
     @Test
     fun testHasTranslationWithInitialization() {
-        UserLanguageStringProvider.initialize(Unit, arrayOf("en", "es"))
+        UserLanguageStringProvider.initialize(Unit, arrayOf("en", "es"), { DefaultIosLanguagePersistence() })
         UserLanguageStringProvider.setLanguage("en")
 
         val hasTranslation = UserLanguageStringProvider.hasTranslation("test.key")
@@ -86,7 +86,7 @@ class UserLanguageStringProviderTest {
 
     @Test
     fun testGetAvailableLanguagesEmpty() {
-        UserLanguageStringProvider.initialize(Unit, emptyArray())
+        UserLanguageStringProvider.initialize(Unit, emptyArray(), { DefaultIosLanguagePersistence() })
 
         val availableLanguages = UserLanguageStringProvider.getAvailableLanguages()
         assertTrue(availableLanguages.isEmpty())
@@ -95,7 +95,7 @@ class UserLanguageStringProviderTest {
     @Test
     fun testGetAvailableLanguagesWithMultipleLanguages() {
         val languages = arrayOf("en", "es", "fr", "de", "ja")
-        UserLanguageStringProvider.initialize(Unit, languages)
+        UserLanguageStringProvider.initialize(Unit, languages, { DefaultIosLanguagePersistence() })
 
         val availableLanguages = UserLanguageStringProvider.getAvailableLanguages()
         assertEquals(languages.toList(), availableLanguages)
@@ -103,20 +103,20 @@ class UserLanguageStringProviderTest {
 
     @Test
     fun testLanguagePreferencePersistence() {
-        UserLanguageStringProvider.initialize(Unit, arrayOf("en", "es", "fr"))
+        UserLanguageStringProvider.initialize(Unit, arrayOf("en", "es", "fr"), { DefaultIosLanguagePersistence() })
 
         // Set a language preference
         UserLanguageStringProvider.setLanguage("es")
         assertEquals("es", UserLanguageStringProvider.getCurrentLanguage())
 
         // Reinitialize - should remember preference due to NSUserDefaults persistence
-        UserLanguageStringProvider.initialize(Unit, arrayOf("en", "es", "fr"))
+        UserLanguageStringProvider.initialize(Unit, arrayOf("en", "es", "fr"), { DefaultIosLanguagePersistence() })
         assertEquals("es", UserLanguageStringProvider.getCurrentLanguage())
     }
 
     @Test
     fun testMultipleLanguageSwitches() {
-        UserLanguageStringProvider.initialize(Unit, arrayOf("en", "es", "fr", "de"))
+        UserLanguageStringProvider.initialize(Unit, arrayOf("en", "es", "fr", "de"), { DefaultIosLanguagePersistence() })
 
         // Switch between multiple languages
         UserLanguageStringProvider.setLanguage("en")
@@ -134,7 +134,7 @@ class UserLanguageStringProviderTest {
 
     @Test
     fun testStringFormattingPatterns() {
-        UserLanguageStringProvider.initialize(Unit, arrayOf("en"))
+        UserLanguageStringProvider.initialize(Unit, arrayOf("en"), { DefaultIosLanguagePersistence() })
         UserLanguageStringProvider.setLanguage("en")
 
         // Test different formatting patterns - should return key as fallback
@@ -147,7 +147,7 @@ class UserLanguageStringProviderTest {
 
     @Test
     fun testFallbackToEnglish() {
-        UserLanguageStringProvider.initialize(Unit, arrayOf("en", "es", "fr"))
+        UserLanguageStringProvider.initialize(Unit, arrayOf("en", "es", "fr"), { DefaultIosLanguagePersistence() })
         UserLanguageStringProvider.setLanguage("fr")
 
         // Should attempt French first, then fall back to English, then return key
@@ -157,7 +157,7 @@ class UserLanguageStringProviderTest {
 
     @Test
     fun testCacheManagement() {
-        UserLanguageStringProvider.initialize(Unit, arrayOf("en", "es"))
+        UserLanguageStringProvider.initialize(Unit, arrayOf("en", "es"), { DefaultIosLanguagePersistence() })
 
         // Set language and test multiple string requests
         UserLanguageStringProvider.setLanguage("en")
@@ -182,7 +182,7 @@ class UserLanguageStringProviderTest {
         // Before setting any language, should be null or previously saved value
         val currentLang1 = UserLanguageStringProvider.getCurrentLanguage()
 
-        UserLanguageStringProvider.initialize(Unit, arrayOf("en", "es"))
+        UserLanguageStringProvider.initialize(Unit, arrayOf("en", "es"), { DefaultIosLanguagePersistence() })
 
         // After initialization without setting language, should be null or previously saved
         val currentLang2 = UserLanguageStringProvider.getCurrentLanguage()

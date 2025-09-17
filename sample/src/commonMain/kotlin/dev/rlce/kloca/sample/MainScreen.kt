@@ -31,6 +31,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.intl.Locale
+import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import dev.rlce.kloca.generated.SampleStringKeys
 import dev.rlce.kloca.runtime.Kloca
@@ -145,7 +147,7 @@ private fun LanguageSelectionOptions(
         for (languageCode in availableLanguages) {
             LanguageOption(
                 languageCode = languageCode,
-                displayName = languageCode.uppercase(),
+                displayName = languageCode.toUpperCase(Locale.current),
                 isSelected = !isUsingSystem && currentLanguage == languageCode,
                 onSelect = {
                     Kloca.setUserLanguage(languageCode)
