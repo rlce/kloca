@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.compose)
     alias(libs.plugins.kotlin.compose)
-    id("io.github.rlce.kloca") version "0.1.0"
+    id("io.github.rlce.kloca") version "0.1.1"
 }
 
 kotlin {
@@ -48,6 +48,7 @@ android {
     compileSdk = libs.versions.android.compileSdk.get().toInt()
     defaultConfig {
         applicationId = "dev.rlce.kloca.sample"
+        targetSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"

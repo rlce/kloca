@@ -52,7 +52,6 @@ class KlocaPlugin : Plugin<Project> {
 
                 try {
                     kotlinExtension.sourceSets.getByName("commonMain").kotlin.srcDir(generatedDir)
-                    project.logger.warn("✅ Successfully added $generatedDir to commonMain kotlin source directories")
                 } catch (e: Exception) {
                     project.logger.warn("❌ Could not add generated directory to commonMain source set: ${e.message}")
                     project.logger.warn("Exception type: ${e.javaClass.simpleName}")
