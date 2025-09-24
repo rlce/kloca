@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.compose)
     alias(libs.plugins.kotlin.compose)
-    id("io.github.rlce.kloca") version "0.1.1"
+    id("io.github.rlce.kloca") version "0.1.0"
 }
 
 kotlin {
