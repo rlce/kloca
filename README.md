@@ -875,9 +875,9 @@ The `sample` directory contains a complete example showing both usage patterns:
 
 ## Requirements
 
-- Kotlin 2.2.0+
-- Gradle 8.0+
-- KSP 2.2.0-2.0.2+
+- Kotlin 2.2.20+
+- Gradle 8.14.3+
+- KSP 2.2.20-2.0.3+
 - Android Gradle Plugin 8.0+ (for Android targets)
 
 ## Documentation
