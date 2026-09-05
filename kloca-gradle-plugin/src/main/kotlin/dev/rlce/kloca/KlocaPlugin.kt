@@ -27,6 +27,7 @@ class KlocaPlugin : Plugin<Project> {
             // Configure output directories for copied resources
             task.androidOutputDirectory.set(project.layout.projectDirectory.dir("src/androidMain/res"))
             task.iosOutputDirectory.set(project.layout.projectDirectory.dir("src/iosMain/resources"))
+            task.wasmJsOutputDirectory.set(project.layout.projectDirectory.dir("src/wasmJsMain/resources"))
         }
 
         // Configure KSP with our internal processor
@@ -89,6 +90,12 @@ class KlocaPlugin : Plugin<Project> {
                 task.name.contains("syncComposeResourcesForIos") ||
                     task.name.contains("prepareComposeResourcesTaskForIos") ||
                     task.name.contains("assembleIosMainResources")
+            }.configureEach { task ->
+                task.dependsOn(generateTranslationsTask)
+            }
+
+            project.tasks.matching { task ->
+                task.name.contains("WasmJs") && task.name.contains("Resources")
             }.configureEach { task ->
                 task.dependsOn(generateTranslationsTask)
             }

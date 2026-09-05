@@ -249,7 +249,7 @@ Configuration DSL for the Gradle plugin.
 ```kotlin
 plugins {
     kotlin("multiplatform")
-    id("io.github.rlce.kloca") version "0.1.0"
+    id("io.github.rlce.kloca") version "0.2.0"
 }
 ```
 
@@ -263,10 +263,10 @@ kotlin {
         commonMain {
             dependencies {
                 // Core runtime for string access
-                implementation("io.github.rlce:kloca-runtime:0.1.0")
+                implementation("io.github.rlce:kloca-runtime:0.2.0")
 
                 // Optional: Compose integration for reactive UI
-                implementation("io.github.rlce:kloca-runtime-compose:0.1.0")
+                implementation("io.github.rlce:kloca-runtime-compose:0.2.0")
             }
         }
     }

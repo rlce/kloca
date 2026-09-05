@@ -1,4 +1,5 @@
 pluginManagement {
+    includeBuild("kloca-gradle-plugin")
     repositories {
         mavenLocal()
         gradlePluginPortal()
@@ -18,7 +19,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "kloca"
 
-include(":kloca-gradle-plugin")
 include(":kloca-runtime")
 include(":kloca-runtime-compose")
 include(":sample")

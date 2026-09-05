@@ -1,11 +1,11 @@
 # Kloca - KSP i18n Plugin for Kotlin Multiplatform
 
-[![Gradle Plugin](https://img.shields.io/badge/Gradle%20Plugin-0.1.0-blue?logo=gradle)](https://central.sonatype.com/search?q=io.github.rlce.kloca)
-[![Runtime](https://img.shields.io/badge/Runtime-0.1.0-blue?logo=apachemaven)](https://central.sonatype.com/search?q=io.github.rlce.kloca-runtime)
-[![KMP](https://img.shields.io/badge/Platforms-Android%20%7C%20iOS-blue?logo=kotlin)](https://kotlinlang.org/docs/multiplatform.html)
+[![Gradle Plugin](https://img.shields.io/badge/Gradle%20Plugin-0.2.0-blue?logo=gradle)](https://central.sonatype.com/search?q=io.github.rlce.kloca)
+[![Runtime](https://img.shields.io/badge/Runtime-0.2.0-blue?logo=apachemaven)](https://central.sonatype.com/search?q=io.github.rlce.kloca-runtime)
+[![KMP](https://img.shields.io/badge/Platforms-Android%20%7C%20iOS%20%7C%20WasmJs-blue?logo=kotlin)](https://kotlinlang.org/docs/multiplatform.html)
 [![Kotlin](https://img.shields.io/badge/Kotlin-2.2.0+-blue.svg)](https://kotlinlang.org)
 
-Kloca is a KSP (Kotlin Symbol Processing) Gradle plugin that automates internationalization (i18n) for Kotlin Multiplatform projects. It processes YAML translation files and generates platform-specific resources and type-safe Kotlin code.
+Kloca is a KSP (Kotlin Symbol Processing) Gradle plugin that automates internationalization (i18n) for Kotlin Multiplatform projects. It processes YAML translation files and generates Android XML, iOS bundles, WasmJs resources, and type-safe Kotlin code.
 
 ## Overview
 
@@ -129,7 +129,7 @@ This hierarchical approach makes your feature modules more **flexible and manage
 
 ## Features
 
-- 🌍 **Multiplatform Support**: Works with Android and iOS targets
+- 🌍 **Multiplatform Support**: Works with Android, iOS, and WasmJs targets
 - 📝 **YAML-based Translations**: Simple, readable translation files
 - 🔒 **Type-safe Access**: Generated string constants for compile-time safety
 - 🎨 **Compose Integration**: Built-in Compose functions for easy UI localization
@@ -146,7 +146,7 @@ Add to your `build.gradle.kts`:
 ```kotlin
 plugins {
     kotlin("multiplatform")
-    id("io.github.rlce.kloca") version "0.1.0"
+    id("io.github.rlce.kloca") version "0.2.0"
 }
 ```
 
@@ -156,7 +156,7 @@ plugins {
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation("io.github.rlce:kloca-runtime:0.1.0")
+            implementation("io.github.rlce:kloca-runtime:0.2.0")
         }
     }
 }
@@ -299,13 +299,13 @@ In your shared module's `build.gradle.kts`:
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
-    id("io.github.rlce.kloca") version "0.1.0"
+    id("io.github.rlce.kloca") version "0.2.0"
 }
 
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation("io.github.rlce:kloca-runtime:0.1.0")
+            implementation("io.github.rlce:kloca-runtime:0.2.0")
         }
     }
 }
@@ -433,7 +433,7 @@ kotlin {
     
     sourceSets {
         iosMain.dependencies {
-            implementation("dev.rlce.kloca:runtime:0.1.0")
+            implementation("io.github.rlce:kloca-runtime:0.2.0")
         }
     }
 }
@@ -579,7 +579,7 @@ kloca {
 ```kotlin
 plugins {
     kotlin("multiplatform")
-    id("io.github.rlce.kloca") version "0.1.0"
+    id("io.github.rlce.kloca") version "0.2.0"
 }
 
 kloca {
@@ -664,10 +664,10 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             // Core runtime for string access
-            implementation("io.github.rlce:kloca-runtime:0.1.0")
+            implementation("io.github.rlce:kloca-runtime:0.2.0")
 
             // Optional: Compose integration
-            implementation("io.github.rlce:kloca-runtime-compose:0.1.0")
+            implementation("io.github.rlce:kloca-runtime-compose:0.2.0")
         }
     }
 }

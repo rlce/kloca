@@ -165,7 +165,7 @@ publish_plugin() {
     fi
 
     echo "Publishing kloca-gradle-plugin..."
-    ./gradlew :kloca-gradle-plugin:publishToMavenCentral --no-configuration-cache
+    ./gradlew -p kloca-gradle-plugin publishToMavenCentral --no-configuration-cache
     echo ""
     echo "✓ Gradle plugin published to Maven Central (staging)"
 }
