@@ -1,10 +1,20 @@
 i18n:
   greeting:
-    hello_with_name: "Hello, %1$s!"
+    hello_with_name: "Hello, {0}!"
+  placeholder_demo:
+    title: "Platform-neutral placeholder demo"
+    description: "Edit the values to see {0}, {1}, {2}, and {3} update."
+    name_label: "Name"
+    count_label: "Item count"
+    price_label: "Unit price"
+    enabled_label: "Enabled"
+    summary: "{0} has {1} items at {2} each. Enabled: {3}"
+    reordered: "Reordered arguments: {2} / {0} / {1}"
+    repeated: "Repeated argument: {0} and again {0}"
   navigation:
     language: "Language"
   language:
     title: "Select Language"
-    current: "Current Language: %1$s"
+    current: "Current Language: {0}"
     system: "System Default"
-    change_success: "Language changed to %1$s"
+    change_success: "Language changed to {0}"

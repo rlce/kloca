@@ -14,11 +14,6 @@ internal object WasmKlocaStore {
     }
 
     fun format(value: String, args: Array<out Any>): String {
-        var result = value
-        args.forEachIndexed { index, argument ->
-            result = result.replace("%${index + 1}\$s", argument.toString())
-        }
-        args.forEach { argument -> result = result.replaceFirst("%s", argument.toString()) }
-        return result
+        return KlocaFormatter.format(value, args)
     }
 }

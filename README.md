@@ -31,7 +31,7 @@ i18n:
   onboarding:
     welcome: "Welcome to our app!"
     get_started: "Get Started"
-    learn_more: "Learn more about %s"
+    learn_more: "Learn more about {0}"
 ```
 
 **One command generates everything:**
@@ -84,19 +84,19 @@ i18n:
     
     registration:
       title: "Create Account"
-      terms_agreement: "I agree to the %s and %s"
+      terms_agreement: "I agree to the {0} and {1}"
       create_account_button: "Create Account"
   
   # Screen-based organization
   home:
-    welcome_message: "Welcome back, %s!"
+    welcome_message: "Welcome back, {0}!"
     quick_actions: "Quick Actions"
     recent_activity: "Recent Activity"
   
   # Module-based organization  
   payment:
     checkout:
-      total: "Total: %s"
+      total: "Total: {0}"
       pay_button: "Pay Now"
     history:
       title: "Payment History"
@@ -172,7 +172,7 @@ i18n:
   greeting:
     hello: "Hello"
     goodbye: "Goodbye"
-    welcome: "Welcome, %s!"
+    welcome: "Welcome, {0}!"
   navigation:
     home: "Home"
     settings: "Settings"
@@ -184,11 +184,56 @@ i18n:
   greeting:
     hello: "Hola"
     goodbye: "Adiós"
-    welcome: "¡Bienvenido, %s!"
+    welcome: "¡Bienvenido, {0}!"
   navigation:
     home: "Inicio"
     settings: "Configuración"
 ```
+
+#### Values with arguments
+
+Use Kloca's platform-neutral, zero-based placeholders in YAML:
+
+```yaml
+i18n:
+  cart:
+    summary: "{0} has {1} items"
+    price: "Total for {0}: {1}"
+```
+
+Pass the values in the same order from shared Kotlin code:
+
+```kotlin
+Kloca.getString(StringKeys.CART_SUMMARY, "Alex", 3)
+localizedString(StringKeys.CART_PRICE, "Alex", 29.95)
+```
+
+`{0}` refers to the first argument, `{1}` to the second, and so on. A placeholder
+can be repeated or reordered by a translation:
+
+```yaml
+# English
+summary: "{0} has {1} items"
+
+# Another language may naturally put the count first
+summary: "{1} items belong to {0}"
+```
+
+Arguments can be strings, numbers, booleans, or other values; Kloca renders each
+value using its string representation. Keep currency, date, and locale-sensitive
+number formatting in shared application code, then pass the formatted result as
+an argument.
+
+Kloca translates this neutral syntax when resources are generated:
+
+| YAML source | Android XML | iOS `.strings` | Wasm |
+|---|---|---|---|
+| `{0}` | `%1$s` | `%1$@` | `{0}` |
+| `{1}` | `%2$s` | `%2$@` | `{1}` |
+
+Java/Android placeholders such as `%s`, `%1$s`, `%d`, and `%1$.2f` remain
+supported for compatibility with existing translations, but `{0}` syntax is
+recommended for new and updated YAML files.
 
 ### 4. Initialize in Your Application
 
@@ -536,7 +581,7 @@ object StringKeys {
 <resources>
     <string name="greeting_hello">Hello</string>
     <string name="greeting_goodbye">Goodbye</string>
-    <string name="greeting_welcome">Welcome, %s!</string>
+    <string name="greeting_welcome">Welcome, %1$s!</string>
     <string name="navigation_home">Home</string>
     <string name="navigation_settings">Settings</string>
 </resources>
@@ -547,7 +592,7 @@ object StringKeys {
 /* en.lproj/Localizable.strings */
 "greeting.hello" = "Hello";
 "greeting.goodbye" = "Goodbye";
-"greeting.welcome" = "Welcome, %s!";
+"greeting.welcome" = "Welcome, %1$@!";
 "navigation.home" = "Home";
 "navigation.settings" = "Settings";
 ```
@@ -688,7 +733,7 @@ Example `values/strings.xml`:
 ```xml
 <resources>
     <string name="greeting_hello">Hello</string>
-    <string name="greeting_welcome">Welcome, %s!</string>
+    <string name="greeting_welcome">Welcome, %1$s!</string>
     <string name="navigation_home">Home</string>
 </resources>
 ```
@@ -705,7 +750,7 @@ shared/src/iosMain/resources/
 Example `en.lproj/Localizable.strings`:
 ```
 "greeting.hello" = "Hello";
-"greeting.welcome" = "Welcome, %s!";
+"greeting.welcome" = "Welcome, %1$@!";
 "navigation.home" = "Home";
 ```
 
@@ -794,10 +839,10 @@ Support for string formatting:
 ```yaml
 i18n:
   messages:
-    welcome: "Welcome, %s!"
-    item_count: "You have %d items"
-    progress: "Progress: %d%%"
-    user_info: "User: %s, Age: %d, Email: %s"
+    welcome: "Welcome, {0}!"
+    item_count: "You have {0} items"
+    progress: "Progress: {0}%"
+    user_info: "User: {0}, Age: {1}, Email: {2}"
 ```
 
 Usage:

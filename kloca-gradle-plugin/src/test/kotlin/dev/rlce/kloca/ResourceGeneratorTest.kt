@@ -172,6 +172,54 @@ class ResourceGeneratorTest {
     }
 
     @Test
+    fun testIosFormatSpecifiersAreNormalizedForAllArgumentTypes() {
+        val tempDir = createTempDir()
+        val translations = YamlProcessor.ProcessedTranslations(
+            entries = listOf(
+                YamlProcessor.TranslationEntry(
+                    "test.formatted",
+                    "Name: %1\$s, count: %2\$d, price: %3\$.2f, enabled: %4\$b, hex: %5\$x, literal: %%",
+                    "en",
+                ),
+            ),
+            languages = setOf("en"),
+            allKeys = setOf("test.formatted"),
+        )
+
+        ResourceGenerator().generateIosResources(translations, tempDir)
+
+        val content = File(tempDir, "ios/en.lproj/Localizable.strings").readText()
+        assertTrue(
+            content.contains(
+                "Name: %1\$@, count: %2\$@, price: %3\$@, enabled: %4\$@, hex: %5\$@, literal: %%",
+            ),
+        )
+        tempDir.deleteRecursively()
+    }
+
+    @Test
+    fun testPlatformNeutralPlaceholdersAreGeneratedForAndroidAndIos() {
+        val tempDir = createTempDir()
+        val translations = YamlProcessor.ProcessedTranslations(
+            entries = listOf(
+                YamlProcessor.TranslationEntry("test.summary", "{1} has {0} items", "en"),
+            ),
+            languages = setOf("en"),
+            allKeys = setOf("test.summary"),
+        )
+
+        val generator = ResourceGenerator()
+        generator.generateAndroidResources(translations, tempDir)
+        generator.generateIosResources(translations, tempDir)
+
+        val android = File(tempDir, "android/values/strings.xml").readText()
+        val ios = File(tempDir, "ios/en.lproj/Localizable.strings").readText()
+        assertTrue(android.contains("%2\$s has %1\$s items"))
+        assertTrue(ios.contains("%2\$@ has %1\$@ items"))
+        tempDir.deleteRecursively()
+    }
+
+    @Test
     fun testEmptyTranslations() {
         val tempDir = createTempDir()
         val generator = ResourceGenerator()

@@ -88,7 +88,7 @@ class ResourceGenerator {
      */
     private fun generateAndroidStringsXml(entries: List<YamlProcessor.TranslationEntry>): String {
         val stringEntries = entries.sortedBy { it.key }.joinToString("\n") { entry ->
-            val escapedValue = escapeAndroidString(entry.value)
+            val escapedValue = escapeAndroidString(normalizeAndroidFormatSpecifiers(entry.value))
             "    <string name=\"${entry.key.replace(".", "_")}\">$escapedValue</string>"
         }
 
@@ -119,6 +119,11 @@ $stringEntries
             .replace("\n", "\\n")
             .replace("\t", "\\t")
     }
+
+    private fun normalizeAndroidFormatSpecifiers(value: String): String =
+        KLOCA_PLACEHOLDER.replace(value) { match ->
+            "%${match.groupValues[1].toInt() + 1}\$s"
+        }
 
     /**
      * Generates iOS-compatible localization bundles from translations.
@@ -175,11 +180,37 @@ $stringEntries
      * @return Properly escaped string safe for iOS Localizable.strings
      */
     private fun escapeIosString(value: String): String {
-        return value
+        return normalizeIosFormatSpecifiers(value)
             .replace("\\", "\\\\")
             .replace("\"", "\\\"")
             .replace("\n", "\\n")
             .replace("\t", "\\t")
             .replace("\r", "\\r")
+    }
+
+    /**
+     * Kloca translation sources use Android/Java printf placeholders. Apple string
+     * resources use %@ for object values, so convert the supported value
+     * placeholders while preserving their optional positional index.
+     *
+     * Formatting is performed by the Kloca runtime rather than NSString, which
+     * means representing every Kotlin argument as an object is both safe and
+     * avoids ABI-specific numeric specifiers such as %ld and %lld.
+     */
+    private fun normalizeIosFormatSpecifiers(value: String): String =
+        JAVA_VALUE_PLACEHOLDER.replace(
+            KLOCA_PLACEHOLDER.replace(value) { match ->
+                "%${match.groupValues[1].toInt() + 1}\$@"
+            },
+        ) { match ->
+            "%${match.groupValues[1]}@"
+        }
+
+    private companion object {
+        // Java Formatter value conversions, including flags, width and precision.
+        // %% and %n are intentionally not value placeholders.
+        val JAVA_VALUE_PLACEHOLDER =
+            Regex("%(\\d+\\$)?[-#+ 0,(<]*\\d*(?:\\.\\d+)?(?:[bBhHsScCdoxXeEfgGaA]|[tT][A-Za-z])")
+        val KLOCA_PLACEHOLDER = Regex("\\{(\\d+)}")
     }
 }

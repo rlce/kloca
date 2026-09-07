@@ -51,13 +51,13 @@ i18n:
 
   welcome:
     greeting: "Hello!"
-    message: "Welcome to Kloca, %s!"
+    message: "Welcome to Kloca, {0}!"
     subtitle: "Select your preferred language below"
 
   language:
     title: "Language Selection"
     system_language: "Use System Language"
-    current: "Current: %s"
+    current: "Current: {0}"
     available: "Available Languages"
 
   buttons:
@@ -81,13 +81,13 @@ i18n:
 
   welcome:
     greeting: "¡Hola!"
-    message: "¡Bienvenido a Kloca, %s!"
+    message: "¡Bienvenido a Kloca, {0}!"
     subtitle: "Selecciona tu idioma preferido abajo"
 
   language:
     title: "Selección de Idioma"
     system_language: "Usar Idioma del Sistema"
-    current: "Actual: %s"
+    current: "Actual: {0}"
     available: "Idiomas Disponibles"
 
   buttons:
@@ -396,7 +396,7 @@ The generated `StringKeys` object provides:
 ### 3. String Parameters
 Parameters are handled seamlessly:
 ```kotlin
-// YAML: "Welcome, %s!"
+// YAML: "Welcome, {0}!"
 // Usage:
 Text(sampleStringKeys.WELCOME_MESSAGE.localized("John"))
 // Result: "Welcome, John!" or "¡Bienvenido, John!"
@@ -419,7 +419,7 @@ Each platform initializes appropriately:
 ```yaml
 i18n:
   order:
-    summary: "Order #%d: %d items for %s"
+    summary: "Order #{0}: {1} items for {2}"
 
 # Usage:
 Text(StringKeys.ORDER_SUMMARY.localized(12345, 3, "$29.99"))

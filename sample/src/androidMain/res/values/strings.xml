@@ -6,4 +6,13 @@
     <string name="language_system">System Default</string>
     <string name="language_title">Select Language</string>
     <string name="navigation_language">Language</string>
+    <string name="placeholder_demo_count_label">Item count</string>
+    <string name="placeholder_demo_description">Edit the values to see %1$s, %2$s, %3$s, and %4$s update.</string>
+    <string name="placeholder_demo_enabled_label">Enabled</string>
+    <string name="placeholder_demo_name_label">Name</string>
+    <string name="placeholder_demo_price_label">Unit price</string>
+    <string name="placeholder_demo_reordered">Reordered arguments: %3$s / %1$s / %2$s</string>
+    <string name="placeholder_demo_repeated">Repeated argument: %1$s and again %1$s</string>
+    <string name="placeholder_demo_summary">%1$s has %2$s items at %3$s each. Enabled: %4$s</string>
+    <string name="placeholder_demo_title">Platform-neutral placeholder demo</string>
 </resources>
