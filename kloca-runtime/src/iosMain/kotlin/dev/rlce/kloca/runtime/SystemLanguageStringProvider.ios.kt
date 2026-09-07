@@ -124,25 +124,7 @@ actual object SystemLanguageStringProvider {
             // Get the base string first
             val format = get(key)
 
-            // Convert args to string format
-            val stringArgs = args.map { it.toString() }
-
-            // Use string replacement for formatting - handle multiple format patterns
-            var result = format
-            stringArgs.forEachIndexed { index, arg ->
-                val argIndex = index + 1
-                // Handle Android/Java style formatting: %1$s, %2$s, etc.
-                result = result.replace("%${argIndex}\$s", arg)
-                // Handle iOS style formatting: %1$@, %2$@, etc.
-                result = result.replace("%${argIndex}\$@", arg)
-                // Handle simple positional formatting: {0}, {1}, etc.
-                result = result.replace("{$index}", arg)
-                // Handle simple %s formatting (sequential)
-                if (index == 0) {
-                    result = result.replaceFirst("%s", arg)
-                }
-            }
-            result
+            KlocaFormatter.format(format, args)
         } catch (_: Exception) {
             key
         }

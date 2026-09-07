@@ -10,23 +10,26 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -49,7 +52,6 @@ fun MainScreen(
     val bottomSheetState = rememberModalBottomSheetState(
         skipPartiallyExpanded = true,
     )
-    val scope = rememberCoroutineScope()
 
     Scaffold { paddingValues ->
         Box(
@@ -57,18 +59,11 @@ fun MainScreen(
                 .fillMaxSize()
                 .padding(paddingValues),
         ) {
-            // Main content centered
-            Column(
-                modifier = Modifier.align(Alignment.Center),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
-            ) {
-                Text(
-                    text = localizedString(SampleStringKeys.GREETING_HELLO_WITH_NAME, "World"),
-                    style = MaterialTheme.typography.headlineLarge,
-                    modifier = Modifier.padding(32.dp),
-                )
-            }
+            PlaceholderDemo(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(bottom = 72.dp),
+            )
 
             // Bottom button
             Button(
@@ -93,6 +88,96 @@ fun MainScreen(
                         showBottomSheet = false
                     },
                 )
+            }
+        }
+    }
+}
+
+@Composable
+private fun PlaceholderDemo(modifier: Modifier = Modifier) {
+    var name by remember { mutableStateOf("Alex") }
+    var count by remember { mutableStateOf("3") }
+    var price by remember { mutableStateOf("9.95") }
+    var enabled by remember { mutableStateOf(true) }
+
+    val countArgument = count.toIntOrNull() ?: 0
+    val priceArgument = price.toDoubleOrNull() ?: 0.0
+
+    Column(
+        modifier = modifier
+            .verticalScroll(rememberScrollState())
+            .padding(24.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
+        Text(
+            text = localizedString(SampleStringKeys.PLACEHOLDER_DEMO_TITLE),
+            style = MaterialTheme.typography.headlineMedium,
+        )
+        Text(
+            text = localizedString(
+                SampleStringKeys.PLACEHOLDER_DEMO_DESCRIPTION,
+                name,
+                countArgument,
+                priceArgument,
+                enabled,
+            ),
+            style = MaterialTheme.typography.bodyMedium,
+        )
+
+        OutlinedTextField(
+            value = name,
+            onValueChange = { name = it },
+            label = { Text(localizedString(SampleStringKeys.PLACEHOLDER_DEMO_NAME_LABEL)) },
+            modifier = Modifier.fillMaxWidth(),
+            singleLine = true,
+        )
+        OutlinedTextField(
+            value = count,
+            onValueChange = { count = it },
+            label = { Text(localizedString(SampleStringKeys.PLACEHOLDER_DEMO_COUNT_LABEL)) },
+            modifier = Modifier.fillMaxWidth(),
+            singleLine = true,
+        )
+        OutlinedTextField(
+            value = price,
+            onValueChange = { price = it },
+            label = { Text(localizedString(SampleStringKeys.PLACEHOLDER_DEMO_PRICE_LABEL)) },
+            modifier = Modifier.fillMaxWidth(),
+            singleLine = true,
+        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text(localizedString(SampleStringKeys.PLACEHOLDER_DEMO_ENABLED_LABEL))
+            Switch(checked = enabled, onCheckedChange = { enabled = it })
+        }
+
+        Card(modifier = Modifier.fillMaxWidth()) {
+            Column(
+                modifier = Modifier.padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+            ) {
+                Text(
+                    text = localizedString(
+                        SampleStringKeys.PLACEHOLDER_DEMO_SUMMARY,
+                        name,
+                        countArgument,
+                        priceArgument,
+                        enabled,
+                    ),
+                    style = MaterialTheme.typography.titleMedium,
+                )
+                Text(
+                    localizedString(
+                        SampleStringKeys.PLACEHOLDER_DEMO_REORDERED,
+                        name,
+                        countArgument,
+                        priceArgument,
+                    ),
+                )
+                Text(localizedString(SampleStringKeys.PLACEHOLDER_DEMO_REPEATED, name))
             }
         }
     }

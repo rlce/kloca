@@ -219,7 +219,7 @@ Example `values/strings.xml`:
 ```xml
 <resources>
     <string name="greeting_hello">Hello</string>
-    <string name="greeting_welcome">Welcome, %s!</string>
+    <string name="greeting_welcome">Welcome, %1$s!</string>
 </resources>
 ```
 
@@ -237,7 +237,7 @@ iosMain/resources/
 Example `en.lproj/Localizable.strings`:
 ```
 "greeting.hello" = "Hello";
-"greeting.welcome" = "Welcome, %s!";
+"greeting.welcome" = "Welcome, %1$@!";
 ```
 
 ## Reactive Programming Support

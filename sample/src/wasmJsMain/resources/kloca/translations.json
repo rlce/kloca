@@ -2,20 +2,38 @@
   "defaultLanguage": "en",
   "translations": {
     "en": {
-      "greeting.hello_with_name": "Hello, %1$s!",
-      "language.change_success": "Language changed to %1$s",
-      "language.current": "Current Language: %1$s",
+      "greeting.hello_with_name": "Hello, {0}!",
+      "language.change_success": "Language changed to {0}",
+      "language.current": "Current Language: {0}",
       "language.system": "System Default",
       "language.title": "Select Language",
-      "navigation.language": "Language"
+      "navigation.language": "Language",
+      "placeholder_demo.count_label": "Item count",
+      "placeholder_demo.description": "Edit the values to see {0}, {1}, {2}, and {3} update.",
+      "placeholder_demo.enabled_label": "Enabled",
+      "placeholder_demo.name_label": "Name",
+      "placeholder_demo.price_label": "Unit price",
+      "placeholder_demo.reordered": "Reordered arguments: {2} / {0} / {1}",
+      "placeholder_demo.repeated": "Repeated argument: {0} and again {0}",
+      "placeholder_demo.summary": "{0} has {1} items at {2} each. Enabled: {3}",
+      "placeholder_demo.title": "Platform-neutral placeholder demo"
     },
     "es": {
-      "greeting.hello_with_name": "¡Hola, %1$s!",
-      "language.change_success": "Idioma cambiado a %1$s",
-      "language.current": "Idioma Actual: %1$s",
+      "greeting.hello_with_name": "¡Hola, {0}!",
+      "language.change_success": "Idioma cambiado a {0}",
+      "language.current": "Idioma Actual: {0}",
       "language.system": "Predeterminado del Sistema",
       "language.title": "Seleccionar Idioma",
-      "navigation.language": "Idioma"
+      "navigation.language": "Idioma",
+      "placeholder_demo.count_label": "Cantidad de artículos",
+      "placeholder_demo.description": "Edita los valores para actualizar {0}, {1}, {2} y {3}.",
+      "placeholder_demo.enabled_label": "Activado",
+      "placeholder_demo.name_label": "Nombre",
+      "placeholder_demo.price_label": "Precio unitario",
+      "placeholder_demo.reordered": "Argumentos reordenados: {2} / {0} / {1}",
+      "placeholder_demo.repeated": "Argumento repetido: {0} y otra vez {0}",
+      "placeholder_demo.summary": "Hay {1} artículos de {0}, a {2} cada uno. Activado: {3}",
+      "placeholder_demo.title": "Demostración de marcadores multiplataforma"
     }
   }
 }

@@ -53,7 +53,7 @@ Place YAML files in `src/main/kloca/`:
 i18n:
   greeting:
     hello: "Hello"
-    welcome: "Welcome, %s!"
+    welcome: "Welcome, {0}!"
   navigation:
     home: "Home"
     settings: "Settings"
@@ -64,7 +64,7 @@ i18n:
 i18n:
   greeting:
     hello: "Hola"
-    welcome: "¡Bienvenido, %s!"
+    welcome: "¡Bienvenido, {0}!"
   navigation:
     home: "Inicio"
     settings: "Configuración"
@@ -196,7 +196,7 @@ i18n:
 ### Supported Features
 
 - **Nested Keys**: `feature.screen.title` becomes `FEATURE_SCREEN_TITLE`
-- **String Interpolation**: Use `%s`, `%d` for parameters
+- **String Interpolation**: Use platform-neutral `{0}`, `{1}` placeholders. Legacy Java/Android placeholders remain supported.
 - **Multiple Languages**: One file per language (`i18n.en.yaml`, `i18n.es.yaml`)
 
 ### File Naming Conventions

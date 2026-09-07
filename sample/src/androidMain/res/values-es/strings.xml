@@ -6,4 +6,13 @@
     <string name="language_system">Predeterminado del Sistema</string>
     <string name="language_title">Seleccionar Idioma</string>
     <string name="navigation_language">Idioma</string>
+    <string name="placeholder_demo_count_label">Cantidad de artículos</string>
+    <string name="placeholder_demo_description">Edita los valores para actualizar %1$s, %2$s, %3$s y %4$s.</string>
+    <string name="placeholder_demo_enabled_label">Activado</string>
+    <string name="placeholder_demo_name_label">Nombre</string>
+    <string name="placeholder_demo_price_label">Precio unitario</string>
+    <string name="placeholder_demo_reordered">Argumentos reordenados: %3$s / %1$s / %2$s</string>
+    <string name="placeholder_demo_repeated">Argumento repetido: %1$s y otra vez %1$s</string>
+    <string name="placeholder_demo_summary">Hay %2$s artículos de %1$s, a %3$s cada uno. Activado: %4$s</string>
+    <string name="placeholder_demo_title">Demostración de marcadores multiplataforma</string>
 </resources>
