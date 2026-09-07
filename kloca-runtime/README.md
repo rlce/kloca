@@ -18,7 +18,7 @@ Kloca Runtime offers two main providers:
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation("io.github.rlce:kloca-runtime:0.2.0")
+            implementation("io.github.rlce:kloca-runtime:0.2.1")
         }
     }
 }

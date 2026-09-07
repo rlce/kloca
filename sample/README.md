@@ -368,12 +368,12 @@ fun LanguageItem(
 ### 1. Build and Generate Translations
 ```bash
 ./gradlew :sample:generateTranslations
-./gradlew :sample:build
+./gradlew :sample-android-app:assembleDebug
 ```
 
 ### 2. Run on Android
 ```bash
-./gradlew :sample:installDebug
+./gradlew :sample-android-app:installDebug
 ```
 
 ### 3. Run on iOS

@@ -50,7 +50,7 @@ This project and everyone participating in it is governed by the [Kloca Code of 
 
 6. **Test with Sample Project**
    ```bash
-   ./gradlew :sample:build
+   ./gradlew :sample-android-app:assembleDebug
    ./gradlew generateTranslations
    ```
 

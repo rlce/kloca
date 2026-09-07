@@ -101,11 +101,12 @@ class KlocaPlugin : Plugin<Project> {
             }
         }
 
-        // Make compileKotlin depend on generateTranslations
-        project.tasks.configureEach { task ->
-            if (task.name.startsWith("compileKotlin") || task.name.contains("KotlinMetadata")) {
-                task.dependsOn(generateTranslationsTask)
-            }
+        // Generated Kotlin sources are shared by all target compilations. Gradle 9 requires
+        // the producer/consumer relationship to be declared explicitly for every compile task.
+        project.tasks.matching { task ->
+            task.name.startsWith("compile")
+        }.configureEach { task ->
+            task.dependsOn(generateTranslationsTask)
         }
     }
 }

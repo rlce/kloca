@@ -8,7 +8,7 @@ class KlocaFormatterTest {
     fun formatsPlatformNeutralPlaceholders() {
         assertEquals(
             "Kloca has 7 items and costs 2.5",
-            KlocaFormatter.format("{0} has {1} items and costs {2}", arrayOf("Kloca", 7, 2.5)),
+            KlocaFormatter.format("{0} has {1} items and costs {2}", arrayOf<Any>("Kloca", 7, 2.5)),
         )
     }
 
@@ -18,7 +18,7 @@ class KlocaFormatterTest {
             "Name: Kloca, count: 7, price: 2.5, enabled: true",
             KlocaFormatter.format(
                 "Name: %1\$s, count: %2\$d, price: %3\$.2f, enabled: %4\$b",
-                arrayOf("Kloca", 7, 2.5, true),
+                arrayOf<Any>("Kloca", 7, 2.5, true),
             ),
         )
     }
@@ -35,7 +35,7 @@ class KlocaFormatterTest {
     fun supportsSequentialPlaceholders() {
         assertEquals(
             "text 42 1.5 false",
-            KlocaFormatter.format("%s %d %f %b", arrayOf("text", 42, 1.5, false)),
+            KlocaFormatter.format("%s %d %f %b", arrayOf<Any>("text", 42, 1.5, false)),
         )
     }
 }
