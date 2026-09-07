@@ -64,7 +64,10 @@ sample/iosApp/KlocaSample.xcodeproj/xcuserdata/
 **/build/generated/
 
 # Kotlin Multiplatform
-kotlin-js-store/
+kotlin-js-store/*
+!kotlin-js-store/wasm/
+kotlin-js-store/wasm/*
+!kotlin-js-store/wasm/yarn.lock
 node_modules/
 
 # Temporary files
