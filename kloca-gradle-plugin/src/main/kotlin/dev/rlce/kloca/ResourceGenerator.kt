@@ -8,11 +8,46 @@ import java.io.File
  * This class handles the conversion of YAML-based translation data into:
  * - Android XML string resources (values/strings.xml format)
  * - iOS localization bundles (.lproj/Localizable.strings format)
+ * - Wasm JSON resources
  *
  * The generated resources follow platform conventions and handle proper escaping
  * for each platform's resource format requirements.
  */
 class ResourceGenerator {
+
+    fun generateWasmResources(
+        translations: YamlProcessor.ProcessedTranslations,
+        outputDir: File,
+        defaultLanguage: String = "en",
+    ) {
+        val wasmDir = File(outputDir, "wasmJs/kloca")
+        wasmDir.mkdirs()
+        val languages = translations.languages.sorted().joinToString(",\n") { language ->
+            val entries = translations.entries
+                .filter { it.language == language }
+                .sortedBy { it.key }
+                .joinToString(",\n") { entry ->
+                    "      \"${escapeJson(entry.key)}\": \"${escapeJson(entry.value)}\""
+                }
+            "    \"${escapeJson(language)}\": {\n$entries\n    }"
+        }
+        File(wasmDir, "translations.json").writeText(
+            "{\n  \"defaultLanguage\": \"${escapeJson(defaultLanguage)}\",\n  \"translations\": {\n$languages\n  }\n}\n",
+        )
+    }
+
+    private fun escapeJson(value: String): String = buildString {
+        value.forEach { char ->
+            when (char) {
+                '\\' -> append("\\\\")
+                '"' -> append("\\\"")
+                '\n' -> append("\\n")
+                '\r' -> append("\\r")
+                '\t' -> append("\\t")
+                else -> append(char)
+            }
+        }
+    }
 
     /**
      * Generates Android-compatible XML string resources from translations.

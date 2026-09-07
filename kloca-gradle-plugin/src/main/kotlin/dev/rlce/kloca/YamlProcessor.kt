@@ -230,6 +230,50 @@ $constants
         """.trimIndent()
     }
 
+    /** Generates an in-binary translation table used by the Wasm runtime. */
+    fun generateTranslationResourcesClass(
+        translations: ProcessedTranslations,
+        namespacePrefix: String,
+        defaultLanguage: String,
+    ): String {
+        val className = if (namespacePrefix.isNotEmpty()) {
+            "${namespacePrefix.replaceFirstChar { it.uppercase() }}Translations"
+        } else {
+            "Translations"
+        }
+        val languages = translations.languages.sorted().joinToString(",\n") { language ->
+            val entries = translations.entries
+                .filter { it.language == language }
+                .sortedBy { it.key }
+                .joinToString(",\n") { entry ->
+                    "            \"${escapeKotlin(entry.key)}\" to \"${escapeKotlin(entry.value)}\""
+                }
+            "        \"${escapeKotlin(language)}\" to mapOf(\n$entries\n        )"
+        }
+
+        return """
+package dev.rlce.kloca.generated
+
+import dev.rlce.kloca.runtime.KlocaTranslationResources
+
+/** Generated translations for web/Wasm. Do not modify this file manually. */
+object $className : KlocaTranslationResources {
+    override val defaultLanguage: String = "${escapeKotlin(defaultLanguage)}"
+    override val translations: Map<String, Map<String, String>> = mapOf(
+$languages
+    )
+}
+        """.trimIndent()
+    }
+
+    private fun escapeKotlin(value: String): String = value
+        .replace("\\", "\\\\")
+        .replace("\"", "\\\"")
+        .replace("$", "\\$")
+        .replace("\n", "\\n")
+        .replace("\r", "\\r")
+        .replace("\t", "\\t")
+
     private fun keyToConstantName(key: String): String {
         return key
             .split(".")

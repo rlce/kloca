@@ -11,8 +11,11 @@ This sample showcases:
 - ✅ **Type-safe String Access**: Generated StringKeys usage
 - ✅ **Compose Integration**: Reactive UI updates on language change
 - ✅ **User Language Selection**: Runtime language switching
-- ✅ **Platform-specific Initialization**: Android and iOS setup
+- ✅ **Platform-specific Initialization**: Android, iOS, and WasmJs setup
 - ✅ **String Formatting**: Parameters in translations
+
+Run the browser sample with `./gradlew :sample:wasmJsBrowserDevelopmentRun`, or
+build its distribution with `./gradlew :sample:wasmJsBrowserDistribution`.
 
 ## Project Structure
 

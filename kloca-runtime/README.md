@@ -1,6 +1,6 @@
 # Kloca Runtime
 
-The core runtime library for accessing localized strings in Kotlin Multiplatform projects. Provides platform-specific implementations for Android and iOS with support for both system language and user preference modes.
+The core runtime library for accessing localized strings in Kotlin Multiplatform projects. Provides platform-specific implementations for Android, iOS, and WasmJs with support for both system language and user preference modes.
 
 ## Overview
 
@@ -18,7 +18,7 @@ Kloca Runtime offers two main providers:
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation("dev.rlce.kloca:runtime:0.1.0")
+            implementation("io.github.rlce:kloca-runtime:0.2.0")
         }
     }
 }
@@ -151,6 +151,19 @@ Kloca supports two language modes:
 - Independent of system language changes
 
 ## Platform-Specific Behavior
+
+### WasmJs
+
+Pass the plugin-generated `<Namespace>Translations` object as the context. The runtime
+uses the browser locale for system language and `localStorage` for persistence:
+
+```kotlin
+startKloca(
+    context = SampleTranslations,
+    availableLanguages = SampleTranslations.translations.keys.toTypedArray(),
+    languagePersistenceFactory = { DefaultWasmLanguagePersistence() },
+)
+```
 
 ### Android
 - **Context**: Requires `Application` context for initialization

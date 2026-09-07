@@ -7,6 +7,29 @@ import kotlin.test.assertTrue
 class ResourceGeneratorTest {
 
     @Test
+    fun testWasmResourceGeneration() {
+        val tempDir = createTempDir()
+        val translations = YamlProcessor.ProcessedTranslations(
+            entries = listOf(
+                YamlProcessor.TranslationEntry("greeting.hello", "Hello \"Wasm\"", "en"),
+                YamlProcessor.TranslationEntry("greeting.hello", "Olá", "pt"),
+            ),
+            languages = setOf("en", "pt"),
+            allKeys = setOf("greeting.hello"),
+        )
+
+        ResourceGenerator().generateWasmResources(translations, tempDir, "en")
+
+        val resource = File(tempDir, "wasmJs/kloca/translations.json")
+        assertTrue(resource.exists())
+        val content = resource.readText()
+        assertTrue(content.contains("\"defaultLanguage\": \"en\""))
+        assertTrue(content.contains("\"greeting.hello\": \"Hello \\\"Wasm\\\"\""))
+        assertTrue(content.contains("\"pt\""))
+        tempDir.deleteRecursively()
+    }
+
+    @Test
     fun testAndroidResourceGeneration() {
         val tempDir = createTempDir()
         val generator = ResourceGenerator()

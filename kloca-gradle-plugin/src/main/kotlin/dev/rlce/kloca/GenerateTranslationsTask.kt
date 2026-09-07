@@ -30,11 +30,15 @@ abstract class GenerateTranslationsTask : DefaultTask() {
     @get:Internal
     abstract val iosOutputDirectory: DirectoryProperty
 
+    @get:Internal
+    abstract val wasmJsOutputDirectory: DirectoryProperty
+
     init {
         // Force task to run if expected output files don't exist
         outputs.upToDateWhen {
             val outputDir = outputDirectory.asFile.get()
             val iosMainResDir = iosOutputDirectory.asFile.get()
+            val wasmJsMainResDir = wasmJsOutputDirectory.asFile.get()
 
             // Check if core generated files exist
             val stringKeysExists = File(outputDir, "StringKeys.kt").exists()
@@ -54,7 +58,9 @@ abstract class GenerateTranslationsTask : DefaultTask() {
                 File(iosMainResDir, "$language.lproj/Localizable.strings").exists()
             }
 
-            stringKeysExists && allIosResourcesExist
+            val wasmResourcesExist = File(wasmJsMainResDir, "kloca/translations.json").exists()
+
+            stringKeysExists && allIosResourcesExist && wasmResourcesExist
         }
     }
 
@@ -83,6 +89,9 @@ abstract class GenerateTranslationsTask : DefaultTask() {
 
             // Create output directory
             outputDir.mkdirs()
+            listOf("android", "ios", "wasmJs").forEach { platform ->
+                File(outputDir, platform).deleteRecursively()
+            }
 
             // Generate StringKeys.kt (always enabled)
             val stringKeysContent = processor.generateStringKeysClass(
@@ -93,9 +102,19 @@ abstract class GenerateTranslationsTask : DefaultTask() {
             stringKeysFile.writeText(stringKeysContent)
             logger.info("Generated StringKeys.kt")
 
+            File(outputDir, "Translations.kt").writeText(
+                processor.generateTranslationResourcesClass(
+                    translations,
+                    namespacePrefix.get(),
+                    defaultLanguage.get(),
+                ),
+            )
+            logger.info("Generated Translations.kt")
+
             // Generate platform resources
             resourceGenerator.generateAndroidResources(translations, outputDir, defaultLanguage.get())
             resourceGenerator.generateIosResources(translations, outputDir, defaultLanguage.get())
+            resourceGenerator.generateWasmResources(translations, outputDir, defaultLanguage.get())
 
             // Copy Android resources to main source set
             copyAndroidResourcesToMainSourceSet(outputDir, androidOutputDirectory.asFile.get())
@@ -103,11 +122,19 @@ abstract class GenerateTranslationsTask : DefaultTask() {
             // Copy iOS resources to main source set
             copyIosResourcesToMainSourceSet(outputDir, iosOutputDirectory.asFile.get())
 
+            copyWasmResourcesToMainSourceSet(outputDir, wasmJsOutputDirectory.asFile.get())
+
             logger.info("Translation generation completed successfully")
         } catch (e: Exception) {
             logger.error("Failed to generate translations", e)
             throw e
         }
+    }
+
+    private fun copyWasmResourcesToMainSourceSet(outputDir: File, targetResourceDir: File) {
+        val wasmResourceDir = File(outputDir, "wasmJs")
+        if (!wasmResourceDir.exists()) return
+        wasmResourceDir.copyRecursively(targetResourceDir, overwrite = true)
     }
 
     private fun copyAndroidResourcesToMainSourceSet(outputDir: File, targetResDir: File) {

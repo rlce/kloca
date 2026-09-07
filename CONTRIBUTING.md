@@ -244,7 +244,7 @@ fun processYamlFiles(sourceDir: File, outputDir: File) {
 ./gradlew test
 
 # Run tests for specific module
-./gradlew :kloca-gradle-plugin:test
+./gradlew -p kloca-gradle-plugin test
 
 # Run tests with coverage
 ./gradlew test jacocoTestReport

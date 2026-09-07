@@ -5,8 +5,9 @@ The Gradle plugin for Kloca that automates translation file processing and resou
 ## Overview
 
 This plugin processes YAML translation files and automatically generates:
-- Platform-specific resource files (Android XML, iOS .strings)
+- Platform-specific resource files (Android XML, iOS .strings, WasmJs JSON)
 - Type-safe Kotlin string constants (`StringKeys.kt`)
+- An embedded `<Namespace>Translations` table for synchronous WasmJs lookups
 - Proper source set integration
 
 ## Usage
@@ -16,7 +17,7 @@ This plugin processes YAML translation files and automatically generates:
 ```kotlin
 plugins {
     kotlin("multiplatform")
-    id("dev.rlce.kloca") version "0.1.0"
+    id("io.github.rlce.kloca") version "0.2.0"
 }
 ```
 
@@ -26,9 +27,9 @@ plugins {
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation("dev.rlce.kloca:runtime:0.1.0")
+            implementation("io.github.rlce:kloca-runtime:0.2.0")
             // Optional: Compose support
-            implementation("dev.rlce.kloca:runtime-compose:0.1.0")
+            implementation("io.github.rlce:kloca-runtime-compose:0.2.0")
         }
     }
 }

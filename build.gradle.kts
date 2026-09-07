@@ -33,5 +33,9 @@ subprojects {
 tasks.register("publishLocal") {
     group = "publishing"
     description = "Publish all modules to local Maven repository"
-    dependsOn(":kloca-gradle-plugin:publishToMavenLocal", ":kloca-runtime:publishToMavenLocal", ":kloca-runtime-compose:publishToMavenLocal")
+    dependsOn(
+        gradle.includedBuild("kloca-gradle-plugin").task(":publishToMavenLocal"),
+        ":kloca-runtime:publishToMavenLocal",
+        ":kloca-runtime-compose:publishToMavenLocal",
+    )
 }

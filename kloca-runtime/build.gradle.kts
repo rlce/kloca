@@ -1,3 +1,5 @@
+@file:OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
+
 import com.vanniktech.maven.publish.KotlinMultiplatform
 import com.vanniktech.maven.publish.JavadocJar
 
@@ -11,6 +13,10 @@ version = project.findProperty("kloca.runtime.version") as String
 group = project.findProperty("project.group") as String
 
 kotlin {
+    wasmJs {
+        browser()
+    }
+
     androidTarget {
         compilerOptions {
             jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)

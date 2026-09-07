@@ -1,12 +1,19 @@
+@file:OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
+
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.application)
     alias(libs.plugins.compose)
     alias(libs.plugins.kotlin.compose)
-    id("io.github.rlce.kloca") version "0.1.0"
+    id("io.github.rlce.kloca")
 }
 
 kotlin {
+    wasmJs {
+        browser()
+        binaries.executable()
+    }
+
     androidTarget {
         compilerOptions {
             jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
@@ -33,7 +40,6 @@ kotlin {
                 implementation(compose.foundation)
                 implementation(compose.material3)
                 implementation(compose.runtime)
-                implementation("org.jetbrains.androidx.navigation:navigation-compose:2.8.0-alpha13")
             }
         }
         
