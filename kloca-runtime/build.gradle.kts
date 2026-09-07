@@ -5,7 +5,7 @@ import com.vanniktech.maven.publish.JavadocJar
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.vanniktech.mavenPublish)
 }
 
@@ -17,11 +17,14 @@ kotlin {
         browser()
     }
 
-    androidTarget {
+    android {
+        namespace = "dev.rlce.kloca.runtime"
+        compileSdk = libs.versions.android.compileSdk.get().toInt()
+        minSdk = libs.versions.android.minSdk.get().toInt()
         compilerOptions {
             jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
         }
-        publishLibraryVariants("release")
+        withHostTest {}
     }
     
     listOf(
@@ -50,7 +53,7 @@ kotlin {
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")
         }
 
-        androidUnitTest.dependencies {
+        getByName("androidHostTest").dependencies {
             implementation(libs.kotlin.test)
             implementation(libs.robolectric)
         }
@@ -61,25 +64,11 @@ kotlin {
     }
 }
 
-android {
-    namespace = "dev.rlce.kloca.runtime"
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
-    defaultConfig {
-        minSdk = libs.versions.android.minSdk.get().toInt()
-    }
-    
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-}
-
 mavenPublishing {
     configure(
         platform = KotlinMultiplatform(
             javadocJar = JavadocJar.None(),
             sourcesJar = true,
-            androidVariantsToPublish = listOf("release"),
         )
     )
     coordinates(

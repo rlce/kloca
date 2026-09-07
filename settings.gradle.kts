@@ -22,3 +22,4 @@ rootProject.name = "kloca"
 include(":kloca-runtime")
 include(":kloca-runtime-compose")
 include(":sample")
+include(":sample-android-app")

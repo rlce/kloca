@@ -1,8 +1,8 @@
 [versions]
-kotlin = "2.2.20"
-ksp = "2.2.20-2.0.3"
-compose = "1.8.2"
-android-gradle = "8.13.0"
+kotlin = "2.3.20"
+ksp = "2.3.7"
+compose = "1.10.3"
+android-gradle = "9.0.0"
 android-minSdk = "24"
 android-compileSdk = "36"
 androidx-activity = "1.10.0"
@@ -48,8 +48,8 @@ robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-android-library = { id = "com.android.library", version.ref = "android-gradle" }
 android-application = { id = "com.android.application", version.ref = "android-gradle" }
+android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "android-gradle" }
 compose = { id = "org.jetbrains.compose", version.ref = "compose" }
 vanniktech-mavenPublish = { id = "com.vanniktech.maven.publish", version.ref = "vanniktechMavenPublish" }
 

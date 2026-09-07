@@ -17,7 +17,7 @@ This plugin processes YAML translation files and automatically generates:
 ```kotlin
 plugins {
     kotlin("multiplatform")
-    id("io.github.rlce.kloca") version "0.2.0"
+    id("io.github.rlce.kloca") version "0.2.1"
 }
 ```
 
@@ -27,9 +27,9 @@ plugins {
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation("io.github.rlce:kloca-runtime:0.2.0")
+            implementation("io.github.rlce:kloca-runtime:0.2.1")
             // Optional: Compose support
-            implementation("io.github.rlce:kloca-runtime-compose:0.2.0")
+            implementation("io.github.rlce:kloca-runtime-compose:0.2.1")
         }
     }
 }

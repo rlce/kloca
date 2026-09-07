@@ -18,8 +18,8 @@ This module extends Kloca runtime with Compose-specific functions that automatic
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation("io.github.rlce:kloca-runtime:0.2.0")
-            implementation("io.github.rlce:kloca-runtime-compose:0.2.0")
+            implementation("io.github.rlce:kloca-runtime:0.2.1")
+            implementation("io.github.rlce:kloca-runtime-compose:0.2.1")
             implementation(compose.runtime)
         }
     }

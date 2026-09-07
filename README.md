@@ -1,7 +1,7 @@
 # Kloca - KSP i18n Plugin for Kotlin Multiplatform
 
-[![Gradle Plugin](https://img.shields.io/badge/Gradle%20Plugin-0.2.0-blue?logo=gradle)](https://central.sonatype.com/search?q=io.github.rlce.kloca)
-[![Runtime](https://img.shields.io/badge/Runtime-0.2.0-blue?logo=apachemaven)](https://central.sonatype.com/search?q=io.github.rlce.kloca-runtime)
+[![Gradle Plugin](https://img.shields.io/badge/Gradle%20Plugin-0.2.1-blue?logo=gradle)](https://central.sonatype.com/search?q=io.github.rlce.kloca)
+[![Runtime](https://img.shields.io/badge/Runtime-0.2.1-blue?logo=apachemaven)](https://central.sonatype.com/search?q=io.github.rlce.kloca-runtime)
 [![KMP](https://img.shields.io/badge/Platforms-Android%20%7C%20iOS%20%7C%20WasmJs-blue?logo=kotlin)](https://kotlinlang.org/docs/multiplatform.html)
 [![Kotlin](https://img.shields.io/badge/Kotlin-2.2.0+-blue.svg)](https://kotlinlang.org)
 
@@ -146,7 +146,7 @@ Add to your `build.gradle.kts`:
 ```kotlin
 plugins {
     kotlin("multiplatform")
-    id("io.github.rlce.kloca") version "0.2.0"
+    id("io.github.rlce.kloca") version "0.2.1"
 }
 ```
 
@@ -156,7 +156,7 @@ plugins {
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation("io.github.rlce:kloca-runtime:0.2.0")
+            implementation("io.github.rlce:kloca-runtime:0.2.1")
         }
     }
 }
@@ -343,14 +343,20 @@ In your shared module's `build.gradle.kts`:
 ```kotlin
 plugins {
     kotlin("multiplatform")
-    id("com.android.library")
-    id("io.github.rlce.kloca") version "0.2.0"
+    id("com.android.kotlin.multiplatform.library")
+    id("io.github.rlce.kloca") version "0.2.1"
 }
 
 kotlin {
+    android {
+        namespace = "com.yourapp.shared"
+        compileSdk = 36
+        minSdk = 24
+    }
+
     sourceSets {
         commonMain.dependencies {
-            implementation("io.github.rlce:kloca-runtime:0.2.0")
+            implementation("io.github.rlce:kloca-runtime:0.2.1")
         }
     }
 }
@@ -478,7 +484,7 @@ kotlin {
     
     sourceSets {
         iosMain.dependencies {
-            implementation("io.github.rlce:kloca-runtime:0.2.0")
+            implementation("io.github.rlce:kloca-runtime:0.2.1")
         }
     }
 }
@@ -624,7 +630,7 @@ kloca {
 ```kotlin
 plugins {
     kotlin("multiplatform")
-    id("io.github.rlce.kloca") version "0.2.0"
+    id("io.github.rlce.kloca") version "0.2.1"
 }
 
 kloca {
@@ -709,10 +715,10 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             // Core runtime for string access
-            implementation("io.github.rlce:kloca-runtime:0.2.0")
+            implementation("io.github.rlce:kloca-runtime:0.2.1")
 
             // Optional: Compose integration
-            implementation("io.github.rlce:kloca-runtime-compose:0.2.0")
+            implementation("io.github.rlce:kloca-runtime-compose:0.2.1")
         }
     }
 }
@@ -920,10 +926,10 @@ The `sample` directory contains a complete example showing both usage patterns:
 
 ## Requirements
 
-- Kotlin 2.2.20+
-- Gradle 8.14.3+
-- KSP 2.2.20-2.0.3+
-- Android Gradle Plugin 8.0+ (for Android targets)
+- Kotlin 2.3.20+
+- Gradle 9.3.0+
+- KSP 2.3.7+
+- Android Gradle Plugin 9.0.0+ (for Android targets)
 
 ## Documentation
 
