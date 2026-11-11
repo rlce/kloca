@@ -11,9 +11,9 @@ actual object UserLanguageStringProvider {
         languagePersistenceFactory: LanguagePersistenceFactory,
     ) {
         require(context is KlocaTranslationResources) {
-            "Wasm initialization requires the generated KlocaTranslationResources object as context"
+            "Web initialization requires the generated KlocaTranslationResources object as context"
         }
-        WasmKlocaStore.resources = context
+        WebKlocaStore.resources = context
         this.availableLanguages = availableLanguages.toList()
         persistence = languagePersistenceFactory.createLanguagePersistence(context)
         preferredLanguage = persistence?.loadLanguage()
@@ -26,12 +26,12 @@ actual object UserLanguageStringProvider {
 
     actual fun getCurrentLanguage(): String? = preferredLanguage
 
-    actual fun getString(key: String): String = WasmKlocaStore.lookup(preferredLanguage, key) ?: key
+    actual fun getString(key: String): String = WebKlocaStore.lookup(preferredLanguage, key) ?: key
 
     actual fun getString(key: String, vararg args: Any): String =
-        WasmKlocaStore.format(getString(key), args)
+        WebKlocaStore.format(getString(key), args)
 
-    actual fun hasTranslation(key: String): Boolean = WasmKlocaStore.lookup(preferredLanguage, key) != null
+    actual fun hasTranslation(key: String): Boolean = WebKlocaStore.lookup(preferredLanguage, key) != null
 
     actual fun getAvailableLanguages(): List<String> = availableLanguages
 }

@@ -19,6 +19,10 @@ kotlin {
         browser()
     }
 
+    js {
+        browser()
+    }
+
     android {
         namespace = "dev.rlce.kloca.runtime.compose"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
