@@ -1,6 +1,6 @@
 package dev.rlce.kloca.runtime
 
-internal object WasmKlocaStore {
+internal object WebKlocaStore {
     lateinit var resources: KlocaTranslationResources
 
     fun lookup(language: String?, key: String): String? {
