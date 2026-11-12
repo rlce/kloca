@@ -2,7 +2,8 @@ package dev.rlce.kloca.runtime
 
 /** Portable formatter for the placeholders accepted in Kloca translations. */
 internal object KlocaFormatter {
-    private val klocaPlaceholder = Regex("\\{(\\d+)}")
+    // The closing brace is escaped: Kotlin/JS compiles regexes in Unicode mode, which rejects a bare "}".
+    private val klocaPlaceholder = Regex("\\{(\\d+)\\}")
     private val placeholder =
         Regex("%(?:(\\d+)\\$)?[-#+ 0,(<]*\\d*(?:\\.\\d+)?(?:[@bBhHsScCdoxXeEfgGaA]|[tT][A-Za-z])")
 
